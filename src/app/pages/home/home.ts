@@ -1,25 +1,24 @@
-import {Component, OnInit} from '@angular/core';
-import {BadgeModule} from 'primeng/badge';
-import {AvatarModule} from 'primeng/avatar';
-import {InputTextModule} from 'primeng/inputtext';
+import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {TableModule} from 'primeng/table';
-import {TagModule} from 'primeng/tag';
-import {RatingModule} from 'primeng/rating';
-import {ButtonModule} from 'primeng/button';
-import {FormsModule} from '@angular/forms';
+import {FeatureService} from "../../service/feature.service";
+import {Router} from "@angular/router";
+import {Product} from "../../models/feature.model";
 
 @Component({
   selector: 'app-home',
-  imports: [ BadgeModule, AvatarModule, InputTextModule, CommonModule,
-    TableModule, TagModule, RatingModule, ButtonModule, FormsModule,
-  ],
+  imports: [ CommonModule,],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })
 export class Home implements OnInit {
+  featureService = inject(FeatureService);
+  router = inject(Router);
+
+  products: Product[] =  [];
 
   ngOnInit() {
-
+      this.featureService.getProducts().subscribe((products) => {
+        this.products = products;
+      })
   }
 }

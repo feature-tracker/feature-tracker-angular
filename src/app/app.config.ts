@@ -9,13 +9,14 @@ import {providePrimeNG} from 'primeng/config';
 import Aura from '@primeng/themes/aura';
 import {routes} from './app.routes';
 import {AuthService} from './service/auth.service';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {AuthInterceptor} from './service/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideZoneChangeDetection({eventCoalescing: true}),
         provideRouter(routes),
+        provideHttpClient(withInterceptorsFromDi()),
         provideAppInitializer(() => {
             const initFn = ((authService: AuthService) => {
                 return () => authService.init();

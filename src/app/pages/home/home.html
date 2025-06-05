@@ -1,3 +1,10 @@
-<div>
-  <h1>Feature Tracker</h1>
+<div *ngFor="let product of products">
+  <div class="h-35">
+    <a href="{{'/products/'+product.code}}">
+      <img src="{{product.imageUrl}}"
+           alt="{{product.name}}"
+           class="h-30">
+    </a>
+  </div>
+  <hr class="p-2"/>
 </div>

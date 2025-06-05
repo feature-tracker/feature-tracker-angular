@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import Keycloak from 'keycloak-js';
-import {UserProfile} from '../domain/user.model';
+import {UserProfile} from '../models/user.model';
 
 export const ADMIN = 'ADMIN';
 
