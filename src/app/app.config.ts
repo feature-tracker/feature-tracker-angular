@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {providePrimeNG} from 'primeng/config';
-import Aura from '@primeng/themes/aura';
+import Lara from '@primeng/themes/lara';
 import {routes} from './app.routes';
 import {AuthService} from './service/auth.service';
 import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
@@ -30,7 +30,7 @@ export const appConfig: ApplicationConfig = {
         },
         providePrimeNG({
             theme: {
-                preset: Aura
+                preset: Lara
             }
         }),
     ]

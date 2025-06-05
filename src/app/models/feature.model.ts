@@ -8,3 +8,28 @@ export interface Product {
   disabled: boolean;
   createdBy: string;
 }
+
+export interface ReleaseDto {
+  id: number;
+  code: string;
+  description: string;
+  status: string;
+  releasedAt: Date;
+  createdBy: string;
+  createdAt: Date;
+  updatedBy: string;
+  updatedAt: Date;
+}
+
+export interface FeatureDto {
+  id: number;
+  code: string;
+  title: string;
+  description: string;
+  status: string;
+  assignedTo: string;
+  createdBy: string;
+  createdAt: Date;
+  updatedBy: string;
+  updatedAt: Date;
+}

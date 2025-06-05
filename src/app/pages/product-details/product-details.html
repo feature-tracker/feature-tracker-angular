@@ -1,0 +1,63 @@
+<div>
+  <div class="h-35">
+    <a href="{{'/products/'+product.code}}">
+      <img src="{{product.imageUrl}}"
+           alt="{{product.name}}"
+           class="h-30">
+    </a>
+
+  </div>
+
+  <p-card class="p-5">
+    <p-table [value]="releases" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template #caption>
+        <div class="flex items-center justify-between">
+          <span class="text-xl font-bold">Releases</span>
+          <p-button  hidden="hidden"/> <!-- bug -->
+          <a class="p-button font-bold"
+             *ngIf="authService.isLoggedIn()"
+             routerLink="/products/{{product.code}}/releases/new"
+             >Create Release</a>
+        </div>
+      </ng-template>
+      <ng-template #header>
+        <tr>
+          <th>Code</th>
+          <th>Description</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-release>
+        <tr>
+          <td>
+            <a href="{{'/products/'+product.code+'/releases/'+release.code}}">{{ release.code }}</a>
+          </td>
+          <td>{{ release.description }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </p-card>
+
+
+  <p-card header="Features" class="p-5">
+    <p-table [value]="features" [tableStyle]="{ 'min-width': '50rem' }">
+      <ng-template #header>
+        <tr>
+          <th>Code</th>
+          <th>Title</th>
+          <th>Status</th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-feature>
+        <tr>
+          <td>
+            <a routerLink="/products/{{product.code}}/features/{{feature.code}}"
+            >{{ feature.code }}</a>
+          </td>
+          <td>{{ feature.title }}</td>
+          <td>{{ feature.status }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>
