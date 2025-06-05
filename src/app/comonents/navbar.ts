@@ -1,5 +1,5 @@
 import {Component, HostListener, inject, OnInit} from '@angular/core';
-import {AuthenticationService} from '../service/authentication.service';
+import {AuthService} from '../service/auth.service';
 import {RouterLink} from '@angular/router';
 
 @Component({
@@ -11,25 +11,23 @@ import {RouterLink} from '@angular/router';
   styleUrl: 'navbar.css'
 })
 export class NavBar implements OnInit {
-  authenticationService = inject(AuthenticationService);
+  authService = inject(AuthService);
 
   isDropdownOpen = false;
 
   user = {
     name: '',
     initials: '',
-    email: ''
   };
 
   projectName = 'Feature Tracker';
 
   ngOnInit(): void {
-    if (this.authenticationService.isLoggedIn()) {
-      this.authenticationService.getUserProfile().then((profile) => {
+    if (this.authService.isLoggedIn()) {
+      this.authService.getUserProfile().then((profile) => {
         this.user = {
           name: profile.name,
           initials: profile.given_name.charAt(0) + profile.family_name.charAt(0),
-          email: profile.email
         };
       })
     }

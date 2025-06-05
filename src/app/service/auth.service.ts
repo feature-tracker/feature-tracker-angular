@@ -9,7 +9,7 @@ export const ADMIN = 'ADMIN';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthenticationService {
+export class AuthService {
 
   router = inject(Router);
   keycloak?: Keycloak;
