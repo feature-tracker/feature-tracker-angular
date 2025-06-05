@@ -1,0 +1,37 @@
+name: Angular Build
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/feature-tracker-angular
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Build with npm
+        run: npm run build
+
+      - if: ${{ github.ref == 'refs/heads/main' }}
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - if: ${{ github.ref == 'refs/heads/main' }}
+        name: Build and Publish Docker Image
+        run: |
+          docker build -t $DOCKER_IMAGE_NAME .
+          echo "Pushing the image $DOCKER_IMAGE_NAME to Docker Hub..."
+          docker push --all-tags $DOCKER_IMAGE_NAME
