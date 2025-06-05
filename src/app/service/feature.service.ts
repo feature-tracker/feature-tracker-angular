@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {FeatureDto, Product, ReleaseDto} from '../models/feature.model';
+import {CreateFeaturePayload, CreateReleasePayload, FeatureDto, Product, ReleaseDto} from '../models/feature.model';
 
 @Injectable({
   providedIn: 'root',
@@ -24,5 +24,13 @@ export class FeatureService {
 
   getProductFeatures(productCode: string) {
     return this.http.get<FeatureDto[]>(this.basePath+'/features/api/features?productCode='+productCode);
+  }
+
+  createRelease(payload: CreateReleasePayload) {
+    return this.http.post(this.basePath+'/features/api/releases', payload);
+  }
+
+  createFeature(payload: CreateFeaturePayload) {
+    return this.http.post(this.basePath+'/features/api/features', payload);
   }
 }

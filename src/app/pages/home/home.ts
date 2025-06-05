@@ -3,10 +3,12 @@ import {CommonModule} from '@angular/common';
 import {FeatureService} from "../../service/feature.service";
 import {Router} from "@angular/router";
 import {Product} from "../../models/feature.model";
+import { DataView } from 'primeng/dataview';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-home',
-  imports: [ CommonModule,],
+  imports: [ CommonModule,DataView, ButtonModule, ],
   templateUrl: './home.html',
   styleUrl: './home.css'
 })

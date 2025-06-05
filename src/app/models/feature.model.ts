@@ -33,3 +33,18 @@ export interface FeatureDto {
   updatedBy: string;
   updatedAt: Date;
 }
+
+export interface CreateReleasePayload {
+  productCode: string;
+  code: string;
+  description: string;
+}
+
+export interface CreateFeaturePayload {
+  productCode: string;
+  code: string;
+  title: string;
+  description: string;
+  assignedTo: string;
+  releaseCode: string;
+}
