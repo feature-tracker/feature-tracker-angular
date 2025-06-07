@@ -48,3 +48,17 @@ export interface CreateFeaturePayload {
   assignedTo: string;
   releaseCode: string;
 }
+
+export interface UpdateFeaturePayload {
+  title: string;
+  description: string;
+  status: string;
+  assignedTo: string;
+}
+
+
+export interface UpdateReleasePayload {
+  description: string;
+  status: string;
+  //releasedAt: Date;
+}

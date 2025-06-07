@@ -1,7 +1,14 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {CreateFeaturePayload, CreateReleasePayload, FeatureDto, Product, ReleaseDto} from '../models/feature.model';
+import {
+  CreateFeaturePayload,
+  CreateReleasePayload,
+  FeatureDto,
+  Product,
+  ReleaseDto,
+  UpdateFeaturePayload, UpdateReleasePayload
+} from '../models/feature.model';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +37,15 @@ export class FeatureService {
     return this.http.post(this.basePath+'/features/api/releases', payload);
   }
 
+  updateRelease(releaseCode:string, payload: UpdateReleasePayload) {
+    return this.http.put(this.basePath+'/features/api/releases/'+releaseCode, payload);
+  }
+
   createFeature(payload: CreateFeaturePayload) {
     return this.http.post(this.basePath+'/features/api/features', payload);
+  }
+
+  updateFeature(featureCode:string, payload: UpdateFeaturePayload) {
+    return this.http.put(this.basePath+'/features/api/features/'+featureCode, payload);
   }
 }

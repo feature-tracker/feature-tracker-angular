@@ -7,3 +7,10 @@ export interface UserProfile {
   given_name: string;
   family_name: string;
 }
+
+export interface UserDto {
+  uuid: string;
+  email: string;
+  fullName: string;
+  role: string;
+}
