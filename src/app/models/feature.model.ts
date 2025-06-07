@@ -1,4 +1,3 @@
-
 export interface Product {
   id: number;
   code: string;
@@ -28,6 +27,7 @@ export interface FeatureDto {
   description: string;
   status: string;
   assignedTo: string;
+  releaseCode: string;
   createdBy: string;
   createdAt: Date;
   updatedBy: string;
@@ -45,15 +45,16 @@ export interface CreateFeaturePayload {
   code: string;
   title: string;
   description: string;
-  assignedTo: string;
-  releaseCode: string;
+  releaseCode: string | null;
+  assignedTo: string | null;
 }
 
 export interface UpdateFeaturePayload {
   title: string;
   description: string;
   status: string;
-  assignedTo: string;
+  releaseCode: string | null;
+  assignedTo: string | null;
 }
 
 
