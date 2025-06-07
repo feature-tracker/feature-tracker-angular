@@ -63,7 +63,7 @@
         <div class="flex flex-col gap-2">
           <label for="assignedTo">Assigned To</label>
           <p-select id="assignedTo" formControlName="assignedTo" [options]="allUsers()"
-                    optionLabel="fullName" optionValue="uuid" class="w-full md:w-56" />
+                    optionLabel="fullName" optionValue="username" class="w-full md:w-56" />
         </div>
         <div class="flex flex-row gap-2">
           <p-button label="Submit" [fluid]="false" type="submit"
@@ -105,7 +105,7 @@
         <div class="flex flex-col gap-2">
           <label for="assignedTo">Assigned To</label>
           <p-select id="assignedTo" formControlName="assignedTo" [options]="allUsers()"
-                    optionLabel="fullName" optionValue="uuid" class="w-full md:w-56" />
+                    optionLabel="fullName" optionValue="username" class="w-full md:w-56" />
         </div>
         <div class="flex flex-row gap-2">
           <p-button label="Submit" [fluid]="false" type="submit"
