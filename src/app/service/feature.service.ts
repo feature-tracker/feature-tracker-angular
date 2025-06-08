@@ -48,4 +48,12 @@ export class FeatureService {
   updateFeature(featureCode:string, payload: UpdateFeaturePayload) {
     return this.http.put(this.basePath+'/features/api/features/'+featureCode, payload);
   }
+
+  getFeatureByCode(featureCode: string) {
+    return this.http.get<FeatureDto>(this.basePath+'/features/api/features/'+featureCode);
+  }
+
+  getReleaseByCode(releaseCode: string) {
+    return this.http.get<ReleaseDto>(this.basePath+'/features/api/releases/'+releaseCode);
+  }
 }

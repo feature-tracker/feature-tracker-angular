@@ -31,7 +31,7 @@ export interface FeatureDto {
   createdBy: string;
   createdAt: Date;
   updatedBy: string;
-  updatedAt: Date;
+  updatedAt?: Date;
 }
 
 export interface CreateReleasePayload {

@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {FeatureService} from '../../service/feature.service';
-import {FeatureDto, Product, ReleaseDto} from '../../models/feature.model';
+import {Product, ReleaseDto} from '../../models/feature.model';
 import {ActivatedRoute} from "@angular/router";
 import {TableModule} from 'primeng/table';
 import {CardModule} from 'primeng/card';
@@ -11,6 +11,8 @@ import {ReleasesTab} from './releases-tab/releases-tab';
 import {FeaturesTab} from './features-tab/features-tab';
 import {UserDto} from '../../models/user.model';
 import {UserService} from '../../service/user.service';
+import {MenuItem} from 'primeng/api';
+import {FTBreadcrumb} from '../../comonents/breadcrumb/breadcrumb';
 
 @Component({
   selector: 'app-product-details',
@@ -22,6 +24,7 @@ import {UserService} from '../../service/user.service';
     ReactiveFormsModule,
     ReleasesTab,
     FeaturesTab,
+    FTBreadcrumb,
   ],
   templateUrl: './product-details.html',
   standalone: true,
@@ -34,6 +37,10 @@ export class ProductDetails implements OnInit {
 
   allUsers: UserDto[] = [];
   releases: ReleaseDto[] = []
+
+  items: MenuItem[] =  [
+    { icon: 'pi pi-home', route: '/home' }
+  ];
 
   error: string | null = null;
 
@@ -64,6 +71,10 @@ export class ProductDetails implements OnInit {
   loadProduct() {
     this.featureService.getProductByCode(this.product.code).subscribe((product) => {
       this.product = product;
+      this.items =  [
+        { icon: 'pi pi-home', route: '/home' },
+        { label: product.name },
+      ];
     })
   }
 

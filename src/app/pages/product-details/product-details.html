@@ -1,11 +1,5 @@
 <div>
-  <div class="h-35">
-    <a href="{{'/products/'+product.code}}">
-      <img src="{{product.imageUrl}}"
-           alt="{{product.name}}"
-           class="h-30">
-    </a>
-  </div>
+  <app-breadcrumb [items]="items" />
 
   <p-card class="card">
     <p-tabs value="0" (click)="onTabChange()">
