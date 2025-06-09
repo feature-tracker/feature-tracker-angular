@@ -1,19 +1,66 @@
 <div id="releases-tab">
   <p-card class="p-5">
-    <p-table [value]="releases()" stripedRows>
+    <p-table #dt1 [value]="releases()" dataKey="code">
       <ng-template #caption>
-        <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
           <p-button class="font-bold"
+                    icon="pi pi-plus-circle"
+                    label="Release"
                     *ngIf="authService.isLoggedIn()"
-                    (click)="showCreateReleaseFormHandler()">
-            <span class="pi pi-plus-circle"></span>  Release</p-button>
+                    (click)="showCreateReleaseFormHandler()"/>
+          <p-button icon="pi pi-filter-slash"
+                    label="Clear"
+                    (click)="clearFilters(dt1)"
+          />
         </div>
       </ng-template>
       <ng-template #header>
         <tr>
-          <th>Code</th>
-          <th>Description</th>
-          <th>Status</th>
+          <th style="min-width:10rem">
+            <div class="flex items-center">
+              Code
+              <p-columnFilter type="text" field="code" display="menu"
+                              showMatchModes="false"
+                              showOperator="false"
+                              matchMode="contains"
+                              showApplyButton="false"
+                              showClearButton="false"
+                              showAddButton="false"
+              />
+            </div>
+          </th>
+          <th style="min-width:10rem">
+            <div class="flex items-center">
+              Description
+              <p-columnFilter type="text" field="description" display="menu"
+                              showMatchModes="false"
+                              showOperator="false"
+                              matchMode="contains"
+                              showApplyButton="false"
+                              showClearButton="false"
+                              showAddButton="false"
+              />
+            </div>
+          </th>
+          <th style="min-width:10rem">
+            <div class="flex items-center">
+              Status
+              <p-columnFilter type="text" field="status" display="menu"
+                              showMatchModes="false"
+                              showOperator="false"
+                              matchMode="equals"
+                              showApplyButton="false"
+                              showClearButton="true"
+                              showAddButton="false">
+                <ng-template #filter let-value let-filter="filterCallback">
+                  <p-select [options]="releaseStatuses" (onChange)="filter($event.value)"
+                            optionLabel="label" optionValue="value"
+                            [ngModel]="value"
+                            placeholder="Select One" [showClear]="true" class="w-full md:w-56"/>
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
           <th>Actions</th>
         </tr>
       </ng-template>
@@ -29,7 +76,9 @@
               <p-button size="small" icon="pi pi-pencil"
                         *ngIf="authService.isLoggedIn()"
                         (onClick)="editRelease(release)"/>
-              <a href="{{'/products/'+productCode()+'/releases/'+release.code}}"><p-button size="small" icon="pi pi-search"/></a>
+              <a href="{{'/products/'+productCode()+'/releases/'+release.code}}">
+                <p-button size="small" icon="pi pi-search"/>
+              </a>
             </div>
           </td>
         </tr>
@@ -74,7 +123,7 @@
         <div class="flex flex-col gap-2">
           <label for="status">Status</label>
           <p-select id="status" formControlName="status" [options]="releaseStatuses"
-                    optionLabel="label" optionValue="value" class="w-full md:w-56" />
+                    optionLabel="label" optionValue="value" class="w-full md:w-56"/>
         </div>
         <div class="flex flex-row gap-2">
           <p-button label="Submit" [fluid]="false" type="submit"

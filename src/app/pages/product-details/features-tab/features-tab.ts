@@ -4,13 +4,13 @@ import {FeatureDto, ReleaseDto} from '../../../models/feature.model';
 import {NgIf} from '@angular/common';
 import {AuthService} from '../../../service/auth.service';
 import {ActivatedRoute, RouterLink} from "@angular/router";
-import {TableModule} from 'primeng/table';
+import {Table, TableModule} from 'primeng/table';
 import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import {TabsModule} from 'primeng/tabs';
 import {InputText} from 'primeng/inputtext';
 import {Select} from 'primeng/select';
-import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserDto} from '../../../models/user.model';
 
 @Component({
@@ -25,6 +25,7 @@ import {UserDto} from '../../../models/user.model';
     InputText,
     ReactiveFormsModule,
     Select,
+    FormsModule,
   ],
   templateUrl: './features-tab.html',
   standalone: true,
@@ -72,6 +73,10 @@ export class FeaturesTab implements OnInit {
 
   ngOnInit(): void {
     this.loadProductFeatures();
+  }
+
+  clearFilters(table: Table) {
+    table.clear()
   }
 
   loadProductFeatures() {

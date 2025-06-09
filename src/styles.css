@@ -1,3 +1,4 @@
 @import "primeicons/primeicons.css";
-@import 'tailwindcss';
-@plugin '@tailwindcss/forms';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -4,13 +4,13 @@ import {ReleaseDto} from '../../../models/feature.model';
 import {NgIf} from '@angular/common';
 import {AuthService} from '../../../service/auth.service';
 import {ActivatedRoute} from "@angular/router";
-import {TableModule} from 'primeng/table';
+import {Table, TableModule} from 'primeng/table';
 import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import {TabsModule} from 'primeng/tabs';
 import {InputText} from 'primeng/inputtext';
 import {Select} from 'primeng/select';
-import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserDto} from '../../../models/user.model';
 
 @Component({
@@ -24,6 +24,7 @@ import {UserDto} from '../../../models/user.model';
     InputText,
     ReactiveFormsModule,
     Select,
+    FormsModule,
   ],
   templateUrl: './releases-tab.html',
   standalone: true,
@@ -66,6 +67,10 @@ export class ReleasesTab implements OnInit {
   showCreateReleaseFormHandler() {
     this.hideAllForms();
     this.showCreateReleaseForm = true;
+  }
+
+  clearFilters(table: Table) {
+    table.clear()
   }
 
   hideAllForms() {
