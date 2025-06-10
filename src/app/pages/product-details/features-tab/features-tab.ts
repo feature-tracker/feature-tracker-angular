@@ -10,6 +10,7 @@ import {ButtonModule} from 'primeng/button';
 import {TabsModule} from 'primeng/tabs';
 import {InputText} from 'primeng/inputtext';
 import {Select} from 'primeng/select';
+import {Textarea} from 'primeng/textarea';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserDto} from '../../../models/user.model';
 
@@ -26,6 +27,7 @@ import {UserDto} from '../../../models/user.model';
     ReactiveFormsModule,
     Select,
     FormsModule,
+    Textarea,
   ],
   templateUrl: './features-tab.html',
   standalone: true,
@@ -95,6 +97,11 @@ export class FeaturesTab implements OnInit {
     this.featureService.getProductFeatures(this.productCode()).subscribe((features) => {
       this.features = features;
     })
+  }
+
+  getFullNameByUsername(username: string): String {
+    let user = this.allUsers().find(user => user.username == username)
+    return user?.fullName ?? username;
   }
 
   showCreateFeatureFormHandler() {

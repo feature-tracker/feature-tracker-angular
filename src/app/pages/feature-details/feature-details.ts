@@ -14,7 +14,6 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {MenuItem} from 'primeng/api';
 import {FTBreadcrumb} from '../../comonents/breadcrumb/breadcrumb';
 
-
 @Component({
   selector: 'app-feature-details',
   imports: [
@@ -100,4 +99,8 @@ export class FeatureDetails implements OnInit {
     })
   }
 
+  getFullNameByUsername(username: string): String {
+    let user = this.allUsers.find(user => user.username == username)
+    return user?.fullName ?? username;
+  }
 }

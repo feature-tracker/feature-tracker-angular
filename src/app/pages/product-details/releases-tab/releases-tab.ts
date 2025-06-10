@@ -10,6 +10,7 @@ import {ButtonModule} from 'primeng/button';
 import {TabsModule} from 'primeng/tabs';
 import {InputText} from 'primeng/inputtext';
 import {Select} from 'primeng/select';
+import {Textarea} from 'primeng/textarea';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserDto} from '../../../models/user.model';
 
@@ -25,6 +26,7 @@ import {UserDto} from '../../../models/user.model';
     ReactiveFormsModule,
     Select,
     FormsModule,
+    Textarea,
   ],
   templateUrl: './releases-tab.html',
   standalone: true,

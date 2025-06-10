@@ -23,7 +23,7 @@
           </div>
           <div class="flex flex-wrap gap-2 w-full">
             <label for="assignedTo" class="font-bold">Assigned To</label>
-            <input pInputText id="assignedTo" type="text" [value]="feature.assignedTo" readonly/>
+            <input pInputText id="assignedTo" type="text" [value]="getFullNameByUsername(feature.assignedTo)" readonly/>
           </div>
         </div>
       </div>

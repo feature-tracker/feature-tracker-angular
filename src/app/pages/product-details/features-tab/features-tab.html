@@ -110,7 +110,7 @@
           <td>{{ feature.title }}</td>
           <td>{{ feature.status }}</td>
           <td>{{ feature.releaseCode }}</td>
-          <td>{{ feature.assignedTo }}</td>
+          <td>{{ getFullNameByUsername(feature.assignedTo) }}</td>
           <td>
             <div class="flex flex-wrap gap-2">
               <p-button size="small" icon="pi pi-pencil"
@@ -140,7 +140,7 @@
         </div>
         <div class="flex flex-col gap-2">
           <label for="description">Description</label>
-          <input pInputText id="description" type="text" formControlName="description"/>
+          <textarea id="description" rows="5" cols="30" pTextarea formControlName="description"></textarea>
         </div>
         <div class="flex flex-col gap-2">
           <label for="releaseCode">Release</label>
@@ -177,7 +177,7 @@
         </div>
         <div class="flex flex-col gap-2">
           <label for="description">Description</label>
-          <input pInputText id="description" type="text" formControlName="description"/>
+          <textarea id="description" rows="5" cols="30" pTextarea formControlName="description"></textarea>
         </div>
         <div class="flex flex-col gap-2">
           <label for="status">Status</label>
