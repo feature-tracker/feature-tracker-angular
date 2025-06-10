@@ -9,21 +9,26 @@
 
         <div class="flex flex-wrap">
           <label for="description" class="font-bold">Description</label>
-          <textarea id="description" rows="5" cols="30" pTextarea [value]="feature.description" readonly></textarea>
+          <textarea id="description" rows="5" cols="30" pTextarea [value]="feature.description"
+                    [disabled]="true"></textarea>
         </div>
 
         <div class="flex flex-col md:flex-row gap-6">
           <div class="flex flex-wrap gap-2 w-full">
             <label for="status" class="font-bold">Status</label>
-            <input pInputText id="status" type="text" [value]="feature.status" readonly/>
+            <input pInputText id="status" type="text" [value]="feature.status"
+                   [disabled]="true"/>
           </div>
           <div class="flex flex-wrap gap-2 w-full">
             <label for="releaseCode" class="font-bold">Release</label>
-            <input pInputText id="releaseCode" type="text" [value]="feature.releaseCode" readonly/>
+            <input pInputText id="releaseCode" type="text" [value]="feature.releaseCode"
+                   [disabled]="true"/>
           </div>
           <div class="flex flex-wrap gap-2 w-full">
             <label for="assignedTo" class="font-bold">Assigned To</label>
-            <input pInputText id="assignedTo" type="text" [value]="getFullNameByUsername(feature.assignedTo)" readonly/>
+            <input pInputText id="assignedTo" type="text"
+                   [value]="getFullNameByUsername(feature.assignedTo)"
+                   [disabled]="true"/>
           </div>
         </div>
       </div>

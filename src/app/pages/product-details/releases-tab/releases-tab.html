@@ -87,51 +87,89 @@
   </p-card>
 
   <p-card class="p-5" *ngIf="showCreateReleaseForm">
-    <form [formGroup]="createReleaseForm" id="createReleaseForm" method="post" (ngSubmit)="handleCreateRelease()">
-      <div class="card flex flex-col gap-4">
-        <div class="font-semibold text-xl">Create Release</div>
-        <div class="flex flex-col gap-2">
-          <label for="code">Code</label>
-          <input pInputText id="code" type="text" formControlName="code"/>
+    <!-- Container -->
+    <div class="max-w-3xl">
+      <!-- Title -->
+      <h2 class="text-2xl font-bold mb-8 ml-32">Create Release Form</h2>
+
+      <!-- Form Grid -->
+      <form class="grid grid-cols-1 md:grid-cols-3 gap-6"
+            [formGroup]="createReleaseForm" id="createReleaseForm" method="post" (ngSubmit)="handleCreateRelease()">
+
+        <!-- Left column (Code, Title, Description) -->
+        <div class="md:col-span-2 space-y-6">
+          <!-- Code -->
+          <div>
+            <label for="code" class="block text-sm font-medium text-gray-700 mb-1">Code</label>
+            <input pInputText id="code" type="text" formControlName="code"
+                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
+
+          <!-- Description -->
+          <div>
+            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+            <textarea id="description" rows="5" cols="30" pTextarea formControlName="description"
+                      class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"></textarea>
+          </div>
+
+          <div class="flex justify-center gap-3">
+            <p-button label="Submit" [fluid]="false" type="submit"
+                      [disabled]="createReleaseForm.invalid"/>
+            <p-button label="Cancel" [fluid]="false" severity="secondary"
+                      (onClick)="hideAllForms()"/>
+          </div>
         </div>
-        <div class="flex flex-col gap-2">
-          <label for="description">Description</label>
-          <textarea id="description" rows="5" cols="30" pTextarea formControlName="description"></textarea>
-        </div>
-        <div class="flex flex-row gap-2">
-          <p-button label="Submit" [fluid]="false" type="submit"
-                    [disabled]="createReleaseForm.invalid"/>
-          <p-button label="Cancel" [fluid]="false" severity="secondary"
-                    (onClick)="hideAllForms()"/>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
+
   </p-card>
 
   <p-card class="p-5" *ngIf="showEditReleaseForm">
-    <form [formGroup]="editReleaseForm" id="editReleaseForm" method="post" (ngSubmit)="handleUpdateRelease()">
-      <div class="card flex flex-col gap-4">
-        <div class="font-semibold text-xl">Edit Release</div>
-        <div class="flex flex-col gap-2">
-          <label for="code">Code</label>
-          <input pInputText id="code" type="text" formControlName="code" readonly/>
+    <!-- Container -->
+    <div class="max-w-5xl">
+      <!-- Title -->
+      <h2 class="text-2xl font-bold text-center mb-8">Edit Release Form</h2>
+
+      <!-- Form Grid -->
+      <form class="grid grid-cols-1 md:grid-cols-3 gap-6"
+            [formGroup]="editReleaseForm" id="editReleaseForm" method="post" (ngSubmit)="handleUpdateRelease()">
+
+        <!-- Left column (Code, Title, Description) -->
+        <div class="md:col-span-2 space-y-6">
+          <!-- Code -->
+          <div>
+            <label for="code" class="block text-sm font-medium text-gray-700 mb-1">Code</label>
+            <input pInputText id="code" type="text" formControlName="code"
+                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                   readonly/>
+          </div>
+
+          <!-- Description -->
+          <div>
+            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+            <textarea id="description" rows="5" cols="30" pTextarea formControlName="description"
+                      class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"></textarea>
+          </div>
         </div>
-        <div class="flex flex-col gap-2">
-          <label for="description">Description</label>
-          <textarea id="description" rows="5" cols="30" pTextarea formControlName="description"></textarea>
+        <div class="md:col-span-1 space-y-6">
+          <!-- Status -->
+          <div>
+            <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+            <p-select id="status" formControlName="status" [options]="releaseStatuses"
+                      optionLabel="label" optionValue="value" class="w-full md:w-56"/>
+          </div>
         </div>
-        <div class="flex flex-col gap-2">
-          <label for="status">Status</label>
-          <p-select id="status" formControlName="status" [options]="releaseStatuses"
-                    optionLabel="label" optionValue="value" class="w-full md:w-56"/>
-        </div>
-        <div class="flex flex-row gap-2">
+
+        <div class="flex justify-center gap-3">
           <p-button label="Submit" [fluid]="false" type="submit"
                     [disabled]="editReleaseForm.invalid"/>
           <p-button label="Cancel" [fluid]="false" severity="secondary"
                     (onClick)="hideAllForms()"/>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
+
   </p-card>
+
 </div>

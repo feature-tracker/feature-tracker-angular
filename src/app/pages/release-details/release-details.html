@@ -7,11 +7,13 @@
 
         <div class="flex flex-col gap-2">
           <label for="description" class="font-bold">Description</label>
-          <textarea id="description" rows="5" cols="30" pTextarea [value]="release.description" readonly></textarea>
+          <textarea id="description" rows="5" cols="30" pTextarea [value]="release.description"
+                    [disabled]="true"></textarea>
         </div>
         <div class="flex flex-col gap-2">
           <label for="status" class="font-bold">Status</label>
-          <input pInputText id="status" type="text" [value]="release.status" readonly/>
+          <input pInputText id="status" type="text" [value]="release.status"
+                 [disabled]="true"/>
         </div>
       </div>
   </p-card>
