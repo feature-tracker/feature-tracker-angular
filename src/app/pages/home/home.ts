@@ -10,7 +10,6 @@ import { ButtonModule } from 'primeng/button';
   selector: 'app-home',
   imports: [ CommonModule,DataView, ButtonModule, ],
   templateUrl: './home.html',
-  styleUrl: './home.css'
 })
 export class Home implements OnInit {
   featureService = inject(FeatureService);

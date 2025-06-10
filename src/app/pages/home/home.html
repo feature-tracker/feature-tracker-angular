@@ -1,6 +1,6 @@
-<div class="card">
+<div>
   <p-dataview #dv [value]="products">
-    <ng-template #list >
+    <ng-template #list>
       <div class="grid grid-cols-12 gap-4">
         <div class="col-span-12" *ngFor="let product of products; let first = first">
           <div
@@ -9,11 +9,11 @@
           >
             <div class="md:w-60 relative">
               <a href="{{'/products/'+product.code}}">
-              <img
-                class="block xl:block mx-auto rounded-border w-full"
-                [src]="'/images/'+product.code+'.png'"
-                [alt]="product.name"
-              />
+                <img
+                  class="block xl:block mx-auto rounded-border w-full"
+                  [src]="'/images/'+product.code+'.png'"
+                  [alt]="product.name"
+                />
               </a>
             </div>
           </div>

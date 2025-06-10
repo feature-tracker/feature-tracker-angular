@@ -23,7 +23,6 @@ import {FTBreadcrumb} from '../../comonents/breadcrumb/breadcrumb';
     FTBreadcrumb
   ],
   templateUrl: './release-details.html',
-  styleUrl: './release-details.css'
 })
 export class ReleaseDetails implements OnInit {
   router = inject(ActivatedRoute);

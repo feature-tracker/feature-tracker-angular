@@ -1,4 +1,4 @@
-import {Component, inject, input, OnInit} from '@angular/core';
+import {Component, inject, input, OnInit, SimpleChanges} from '@angular/core';
 import {FeatureService} from '../../../service/feature.service';
 import {FeatureDto, ReleaseDto} from '../../../models/feature.model';
 import {NgIf} from '@angular/common';
@@ -73,6 +73,18 @@ export class FeaturesTab implements OnInit {
 
   ngOnInit(): void {
     this.loadProductFeatures();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const product = changes['productCode'];
+    if (product === undefined) {
+      return;
+    }
+    const oldValue = product.previousValue;
+    const newValue = product.currentValue;
+    if (oldValue !== newValue) {
+      this.loadProductFeatures();
+    }
   }
 
   clearFilters(table: Table) {

@@ -16,6 +16,7 @@ import {FTBreadcrumb} from '../../comonents/breadcrumb/breadcrumb';
 
 @Component({
   selector: 'app-product-details',
+  standalone: true,
   imports: [
     TableModule,
     CardModule,
@@ -27,8 +28,6 @@ import {FTBreadcrumb} from '../../comonents/breadcrumb/breadcrumb';
     FTBreadcrumb,
   ],
   templateUrl: './product-details.html',
-  standalone: true,
-  styleUrl: './product-details.css'
 })
 export class ProductDetails implements OnInit {
   featureService = inject(FeatureService);

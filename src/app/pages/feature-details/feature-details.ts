@@ -28,7 +28,6 @@ import {FTBreadcrumb} from '../../comonents/breadcrumb/breadcrumb';
     FTBreadcrumb,
   ],
   templateUrl: './feature-details.html',
-  styleUrl: './feature-details.css'
 })
 export class FeatureDetails implements OnInit {
   router = inject(ActivatedRoute);
