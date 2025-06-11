@@ -4,12 +4,10 @@ import {FeatureDto, Product, ReleaseDto} from '../../models/feature.model';
 import {FeatureService} from '../../service/feature.service';
 import {UserService} from '../../service/user.service';
 import {Card} from 'primeng/card';
-import {InputText} from 'primeng/inputtext';
 import {NgIf} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {TextareaModule} from 'primeng/textarea';
 import {UserDto} from '../../models/user.model';
-import {Fluid} from 'primeng/fluid';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {MenuItem} from 'primeng/api';
 import {FTBreadcrumb} from '../../comonents/breadcrumb/breadcrumb';
@@ -18,11 +16,9 @@ import {FTBreadcrumb} from '../../comonents/breadcrumb/breadcrumb';
   selector: 'app-feature-details',
   imports: [
     Card,
-    InputText,
     NgIf,
     ReactiveFormsModule,
     TextareaModule,
-    Fluid,
     BreadcrumbModule,
     FTBreadcrumb,
   ],

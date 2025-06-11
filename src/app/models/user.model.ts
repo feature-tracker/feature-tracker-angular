@@ -6,6 +6,7 @@ export interface UserProfile {
   name: string;
   given_name: string;
   family_name: string;
+  roles: string[];
 }
 
 export interface UserDto {

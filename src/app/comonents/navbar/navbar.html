@@ -6,7 +6,6 @@
       <!-- Show when user is not logged in -->
       @if (!authService.isLoggedIn()) {
         <li><a href="#" class="nav-link" (click)="authService.login()">Login</a></li>
-        <li><a href="#" class="nav-link" routerLink="/registration">Register</a></li>
       }
 
       <!-- Show when user is logged in -->
@@ -17,9 +16,6 @@
             {{ user.name }}
           </button>
           <div class="dropdown-menu">
-            <a href="#" class="dropdown-item" routerLink="/user/profile">Profile</a>
-            <a href="#" class="dropdown-item" routerLink="/user/settings">Settings</a>
-            <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item" (click)="authService.logout()">Logout</a>
           </div>
         </li>

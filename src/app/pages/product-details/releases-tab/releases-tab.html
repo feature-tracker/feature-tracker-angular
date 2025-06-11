@@ -6,7 +6,7 @@
           <p-button class="font-bold"
                     icon="pi pi-plus-circle"
                     label="Release"
-                    *ngIf="authService.isLoggedIn()"
+                    *ngIf="authService.isCurrentUserAdmin()"
                     (click)="openCreateReleaseDialog()"/>
           <p-button icon="pi pi-filter-slash"
                     label="Clear"
@@ -75,7 +75,7 @@
           <td>
             <div class="flex flex-wrap gap-2">
               <p-button size="small" icon="pi pi-pencil"
-                        *ngIf="authService.isLoggedIn()"
+                        *ngIf="authService.isCurrentUserAdmin()"
                         (onClick)="editRelease(release)"/>
               <a href="{{'/products/'+productCode()+'/releases/'+release.code}}">
                 <p-button size="small" icon="pi pi-search"/>

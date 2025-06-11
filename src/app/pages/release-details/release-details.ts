@@ -1,6 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Card} from 'primeng/card';
-import {InputText} from 'primeng/inputtext';
 import {NgIf} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
@@ -16,7 +15,6 @@ import {FTBreadcrumb} from '../../comonents/breadcrumb/breadcrumb';
   selector: 'app-release-details',
   imports: [
     Card,
-    InputText,
     NgIf,
     ReactiveFormsModule,
     Textarea,

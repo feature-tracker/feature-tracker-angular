@@ -1,10 +1,11 @@
-import { Injectable, inject } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { ActivatedRouteSnapshot, Router } from '@angular/router';
+import {inject, Injectable} from '@angular/core';
+import {environment} from '../../environments/environment';
+import {ActivatedRouteSnapshot, Router} from '@angular/router';
 import Keycloak from 'keycloak-js';
 import {UserProfile} from '../models/user.model';
 
-export const ADMIN = 'ADMIN';
+export const ROLE_USER = 'ROLE_USER';
+export const ROLE_ADMIN = 'ROLE_ADMIN';
 
 @Injectable({
   providedIn: 'root',
@@ -61,12 +62,23 @@ export class AuthService {
 
   async getUserProfile() {
     const profile = await this.keycloak?.loadUserInfo();
-    //console.log("profile->", profile);
-    return profile as UserProfile;
+    let userProfile = profile as UserProfile;
+    userProfile.roles = this.getCurrentUserRoles()
+    return userProfile;
+  }
+
+  getCurrentUserRoles() {
+    if(!this.isLoggedIn()) return [];
+    const realmRoles = this.keycloak?.realmAccess?.roles || [];
+    return realmRoles.filter(role => role.startsWith("ROLE_") || role.startsWith("SCOPE_"));
+  }
+
+  isCurrentUserAdmin() {
+    return this.hasAnyRole([ROLE_ADMIN]);
   }
 
   hasAnyRole(requiredRoles: string[]) {
-    const currentRoles = this.keycloak!!.realmAccess!!['roles'];
+    const currentRoles = this.getCurrentUserRoles();
     return requiredRoles.some((requiredRole) => currentRoles.includes(requiredRole));
   }
 
