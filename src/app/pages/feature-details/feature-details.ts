@@ -34,7 +34,7 @@ export class FeatureDetails implements OnInit {
   userService = inject(UserService);
 
   items: MenuItem[] =  [
-    { icon: 'pi pi-home', route: '/home' }
+    { icon: 'pi pi-home', route: '/' }
   ];
 
   productCode = '';
@@ -74,7 +74,7 @@ export class FeatureDetails implements OnInit {
     this.featureService.getProductByCode(this.productCode).subscribe((product) => {
       this.product = product;
       this.items =  [
-        { icon: 'pi pi-home', route: '/home' },
+        { icon: 'pi pi-home', route: '/' },
         { label: product.name, route: '/products/' + product.code },
         { label: 'Features' },
       ];

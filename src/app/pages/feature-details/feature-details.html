@@ -2,36 +2,77 @@
   <app-breadcrumb [items]="items" />
 
   <p-card class="p-5" *ngIf="feature != null">
-    <p-fluid>
 
-      <div class="card flex flex-col gap-6 w-full">
-        <div class="font-semibold text-xl">{{ feature.code + ' : '+ feature.title }}</div>
+    <div class="max-w-6xl">
+      <form class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-        <div class="flex flex-wrap">
-          <label for="description" class="font-bold">Description</label>
-          <textarea id="description" rows="5" cols="30" pTextarea [value]="feature.description"
-                    [disabled]="true"></textarea>
+        <!-- Left: Code + Description textarea -->
+
+        <label for="details"
+          class="block text-2xl font-bold text-gray-700 md:col-span-2 md:row-start-1">
+            {{ feature.title }}
+          </label>
+          <!-- filler for col-3, row-1 -->
+          <div class="hidden md:block"></div>
+
+          <textarea
+            id="details"
+            name="details"
+            rows="10"
+            class="w-full border border-gray-300 rounded-xl p-4
+             focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none
+             md:col-span-2 md:row-start-2"
+            placeholder="Enter description..."
+            pTextarea
+            [value]="feature.description"
+            readonly
+          ></textarea>
+
+
+        <!-- Right: Status, Assigned To, Release,  -->
+        <div class="space-y-6 md:col-start-3 md:row-start-2">
+          <div>
+            <label for="status" class="block text-base font-bold text-gray-700 mb-1">
+              Status:
+            </label>
+            <input
+              id="status"
+              name="status"
+              type="text"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              [value]="feature.status"
+              readonly
+            />
+          </div>
+          <div>
+            <label for="release" class="block text-base font-bold text-gray-700 mb-1">
+              Release:
+            </label>
+            <input
+              id="release"
+              name="release"
+              type="text"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              [value]="feature.releaseCode"
+              readonly
+            />
+          </div>
+
+          <div>
+            <label for="assignedTo" class="block text-base font-bold text-gray-700 mb-1">
+              Assigned To:
+            </label>
+            <input
+              id="assignedTo"
+              name="assignedTo"
+              type="text"
+              class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              [value]="getFullNameByUsername(feature.assignedTo)"
+              readonly
+            />
+          </div>
         </div>
-
-        <div class="flex flex-col md:flex-row gap-6">
-          <div class="flex flex-wrap gap-2 w-full">
-            <label for="status" class="font-bold">Status</label>
-            <input pInputText id="status" type="text" [value]="feature.status"
-                   [disabled]="true"/>
-          </div>
-          <div class="flex flex-wrap gap-2 w-full">
-            <label for="releaseCode" class="font-bold">Release</label>
-            <input pInputText id="releaseCode" type="text" [value]="feature.releaseCode"
-                   [disabled]="true"/>
-          </div>
-          <div class="flex flex-wrap gap-2 w-full">
-            <label for="assignedTo" class="font-bold">Assigned To</label>
-            <input pInputText id="assignedTo" type="text"
-                   [value]="getFullNameByUsername(feature.assignedTo)"
-                   [disabled]="true"/>
-          </div>
-        </div>
-      </div>
-    </p-fluid>
+      </form>
+    </div>
   </p-card>
 </div>

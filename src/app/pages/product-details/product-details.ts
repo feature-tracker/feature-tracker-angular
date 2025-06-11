@@ -38,7 +38,7 @@ export class ProductDetails implements OnInit {
   releases: ReleaseDto[] = []
 
   items: MenuItem[] =  [
-    { icon: 'pi pi-home', route: '/home' }
+    { icon: 'pi pi-home', route: '/' }
   ];
 
   error: string | null = null;
@@ -71,7 +71,7 @@ export class ProductDetails implements OnInit {
     this.featureService.getProductByCode(this.product.code).subscribe((product) => {
       this.product = product;
       this.items =  [
-        { icon: 'pi pi-home', route: '/home' },
+        { icon: 'pi pi-home', route: '/' },
         { label: product.name },
       ];
     })
