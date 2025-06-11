@@ -13,6 +13,7 @@ import {Select} from 'primeng/select';
 import {Textarea} from 'primeng/textarea';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserDto} from '../../../models/user.model';
+import {Dialog} from 'primeng/dialog';
 
 @Component({
   selector: 'app-features-tab',
@@ -28,6 +29,7 @@ import {UserDto} from '../../../models/user.model';
     Select,
     FormsModule,
     Textarea,
+    Dialog,
   ],
   templateUrl: './features-tab.html',
   standalone: true,
@@ -53,8 +55,8 @@ export class FeaturesTab implements OnInit {
 
   features: FeatureDto[] = []
 
-  showCreateFeatureForm = false;
-  showEditFeatureForm = false;
+  createFeatureDialog = false;
+  editFeatureDialog = false;
 
   createFeatureForm = this.fb.group({
     code: ['', [Validators.required]],
@@ -104,14 +106,19 @@ export class FeaturesTab implements OnInit {
     return user?.fullName ?? username;
   }
 
-  showCreateFeatureFormHandler() {
-    this.hideAllForms();
-    this.showCreateFeatureForm = true;
+  openCreateFeatureDialog() {
+    this.createFeatureDialog = true;
+  }
+  hideCreateFeatureDialog() {
+    this.createFeatureDialog = false;
   }
 
-  hideAllForms() {
-    this.showCreateFeatureForm = false;
-    this.showEditFeatureForm = false;
+  openEditFeatureDialog() {
+    this.editFeatureDialog = true;
+  }
+
+  hideEditFeatureDialog() {
+    this.editFeatureDialog = false;
   }
 
   handleCreateFeature() {
@@ -125,7 +132,7 @@ export class FeaturesTab implements OnInit {
     }).subscribe({
       next: response => {
         this.loadProductFeatures();
-        this.showCreateFeatureForm = false;
+        this.hideCreateFeatureDialog();
         this.createFeatureForm.reset();
       },
       error: () => {
@@ -135,8 +142,6 @@ export class FeaturesTab implements OnInit {
   }
 
   editFeature(feature: FeatureDto) {
-    this.hideAllForms();
-    this.showEditFeatureForm = true;
     this.editFeatureForm.patchValue({
       code: feature.code,
       title: feature.title,
@@ -145,6 +150,7 @@ export class FeaturesTab implements OnInit {
       releaseCode: feature.releaseCode,
       assignedTo: feature.assignedTo,
     });
+    this.openEditFeatureDialog();
   }
 
   handleUpdateFeature() {
@@ -158,8 +164,8 @@ export class FeaturesTab implements OnInit {
         assignedTo: this.editFeatureForm.value.assignedTo || null,
       }).subscribe({
       next: response => {
-        this.hideAllForms();
         this.loadProductFeatures();
+        this.hideEditFeatureDialog();
       },
       error: () => {
         this.error = "Failed to update feature."

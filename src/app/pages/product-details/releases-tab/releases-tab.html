@@ -7,7 +7,7 @@
                     icon="pi pi-plus-circle"
                     label="Release"
                     *ngIf="authService.isLoggedIn()"
-                    (click)="showCreateReleaseFormHandler()"/>
+                    (click)="openCreateReleaseDialog()"/>
           <p-button icon="pi pi-filter-slash"
                     label="Clear"
                     (click)="clearFilters(dt1)"
@@ -86,90 +86,67 @@
     </p-table>
   </p-card>
 
-  <p-card class="p-5" *ngIf="showCreateReleaseForm">
-    <!-- Container -->
-    <div class="max-w-3xl">
-      <!-- Title -->
-      <h2 class="text-2xl font-bold mb-8 ml-32">Create Release Form</h2>
-
-      <!-- Form Grid -->
-      <form class="grid grid-cols-1 md:grid-cols-3 gap-6"
-            [formGroup]="createReleaseForm" id="createReleaseForm" method="post" (ngSubmit)="handleCreateRelease()">
-
-        <!-- Left column (Code, Title, Description) -->
-        <div class="md:col-span-2 space-y-6">
-          <!-- Code -->
+  <p-dialog [(visible)]="createReleaseDialog" [style]="{ width: '450px' }"
+            header="Create New Release" [modal]="true">
+    <ng-template #content>
+      <form [formGroup]="createReleaseForm" id="createReleaseForm" method="post" (ngSubmit)="handleCreateRelease()">
+        <div class="flex flex-col gap-6">
           <div>
-            <label for="code" class="block text-sm font-medium text-gray-700 mb-1">Code</label>
-            <input pInputText id="code" type="text" formControlName="code"
-                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            />
+            <label for="code" class="block font-bold mb-3">Code</label>
+            <input type="text" pInputText id="code" formControlName="code" required autofocus fluid/>
           </div>
-
-          <!-- Description -->
           <div>
-            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-            <textarea id="description" rows="5" cols="30" pTextarea formControlName="description"
-                      class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"></textarea>
-          </div>
-
-          <div class="flex justify-center gap-3">
-            <p-button label="Submit" [fluid]="false" type="submit"
-                      [disabled]="createReleaseForm.invalid"/>
-            <p-button label="Cancel" [fluid]="false" severity="secondary"
-                      (onClick)="hideAllForms()"/>
+            <label for="description" class="block font-bold mb-3">Description</label>
+            <textarea id="description" rows="5" cols="30"
+                      pTextarea
+                      formControlName="description"
+                      class="w-full border border-gray-300 rounded-lg px-4 py-2
+                    focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none">
+          </textarea>
           </div>
         </div>
       </form>
-    </div>
+    </ng-template>
+    <ng-template #footer>
+      <p-button label="Cancel" icon="pi pi-times" text (click)="hideCreateReleaseDialog()"/>
+      <p-button label="Save" icon="pi pi-check"
+                [disabled]="createReleaseForm.invalid"
+                (click)="handleCreateRelease()"/>
+    </ng-template>
 
-  </p-card>
+  </p-dialog>
 
-  <p-card class="p-5" *ngIf="showEditReleaseForm">
-    <!-- Container -->
-    <div class="max-w-5xl">
-      <!-- Title -->
-      <h2 class="text-2xl font-bold text-center mb-8">Edit Release Form</h2>
-
-      <!-- Form Grid -->
-      <form class="grid grid-cols-1 md:grid-cols-3 gap-6"
-            [formGroup]="editReleaseForm" id="editReleaseForm" method="post" (ngSubmit)="handleUpdateRelease()">
-
-        <!-- Left column (Code, Title, Description) -->
-        <div class="md:col-span-2 space-y-6">
-          <!-- Code -->
+  <p-dialog [(visible)]="editReleaseDialog" [style]="{ width: '450px', height: '650px' }"
+            header="Edit Release" [modal]="true">
+    <ng-template #content>
+      <form [formGroup]="editReleaseForm" id="editReleaseForm" method="post" (ngSubmit)="handleUpdateRelease()">
+        <div class="flex flex-col gap-6">
           <div>
-            <label for="code" class="block text-sm font-medium text-gray-700 mb-1">Code</label>
-            <input pInputText id="code" type="text" formControlName="code"
-                   class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                   readonly/>
+            <label for="code" class="block font-bold mb-3">Code</label>
+            <input type="text" pInputText id="code" formControlName="code" readonly fluid/>
           </div>
-
-          <!-- Description -->
           <div>
-            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-            <textarea id="description" rows="5" cols="30" pTextarea formControlName="description"
-                      class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none"></textarea>
+            <label for="description" class="block font-bold mb-3">Description</label>
+            <textarea id="description" rows="5" cols="30"
+                      pTextarea
+                      formControlName="description"
+                      class="w-full border border-gray-300 rounded-lg px-4 py-2
+                    focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none">
+          </textarea>
           </div>
-        </div>
-        <div class="md:col-span-1 space-y-6">
-          <!-- Status -->
           <div>
-            <label for="status" class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+            <label for="status" class="block font-bold mb-3">Status</label>
             <p-select id="status" formControlName="status" [options]="releaseStatuses"
                       optionLabel="label" optionValue="value" class="w-full md:w-56"/>
           </div>
         </div>
-
-        <div class="flex justify-center gap-3">
-          <p-button label="Submit" [fluid]="false" type="submit"
-                    [disabled]="editReleaseForm.invalid"/>
-          <p-button label="Cancel" [fluid]="false" severity="secondary"
-                    (onClick)="hideAllForms()"/>
-        </div>
       </form>
-    </div>
-
-  </p-card>
-
+    </ng-template>
+    <ng-template #footer>
+      <p-button label="Cancel" icon="pi pi-times" text (click)="hideEditReleaseDialog()"/>
+      <p-button label="Save" icon="pi pi-check"
+                [disabled]="editReleaseForm.invalid"
+                (click)="handleUpdateRelease()"/>
+    </ng-template>
+  </p-dialog>
 </div>

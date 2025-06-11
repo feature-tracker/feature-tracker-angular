@@ -13,6 +13,7 @@ import {Select} from 'primeng/select';
 import {Textarea} from 'primeng/textarea';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserDto} from '../../../models/user.model';
+import {Dialog} from 'primeng/dialog';
 
 @Component({
   selector: 'app-releases-tab',
@@ -27,6 +28,7 @@ import {UserDto} from '../../../models/user.model';
     Select,
     FormsModule,
     Textarea,
+    Dialog,
   ],
   templateUrl: './releases-tab.html',
   standalone: true,
@@ -43,6 +45,9 @@ export class ReleasesTab implements OnInit {
 
   releasesChanged = output()
 
+  createReleaseDialog = false;
+  editReleaseDialog = false;
+
   error: string | null = null;
   createReleaseForm = this.fb.group({
     code: ['', [Validators.required]],
@@ -54,9 +59,6 @@ export class ReleasesTab implements OnInit {
     {label: 'Released', value: 'RELEASED'},
   ];
 
-  showCreateReleaseForm = false;
-  showEditReleaseForm = false;
-
   editReleaseForm = this.fb.group({
     code: ['', [Validators.required]],
     description: ['', [Validators.required]],
@@ -66,18 +68,23 @@ export class ReleasesTab implements OnInit {
   ngOnInit(): void {
   }
 
-  showCreateReleaseFormHandler() {
-    this.hideAllForms();
-    this.showCreateReleaseForm = true;
+  openCreateReleaseDialog() {
+    this.createReleaseDialog = true;
+  }
+  hideCreateReleaseDialog() {
+    this.createReleaseDialog = false;
+  }
+
+  openEditReleaseDialog() {
+    this.editReleaseDialog = true;
+  }
+
+  hideEditReleaseDialog() {
+    this.editReleaseDialog = false;
   }
 
   clearFilters(table: Table) {
     table.clear()
-  }
-
-  hideAllForms() {
-    this.showCreateReleaseForm = false;
-    this.showEditReleaseForm = false;
   }
 
   handleCreateRelease() {
@@ -88,7 +95,7 @@ export class ReleasesTab implements OnInit {
     }).subscribe({
       next: response => {
         //console.log("response:", response)
-        this.showCreateReleaseForm = false;
+        this.hideCreateReleaseDialog();
         this.createReleaseForm.reset();
         this.releasesChanged.emit()
       },
@@ -99,13 +106,12 @@ export class ReleasesTab implements OnInit {
   }
 
   editRelease(release: ReleaseDto) {
-    this.hideAllForms();
-    this.showEditReleaseForm = true;
     this.editReleaseForm.patchValue({
       code: release.code,
       description: release.description,
       status: release.status,
     });
+    this.openEditReleaseDialog();
   }
 
   handleUpdateRelease() {
@@ -116,7 +122,7 @@ export class ReleasesTab implements OnInit {
         status: this.editReleaseForm.value.status || "",
       }).subscribe({
       next: response => {
-        this.hideAllForms();
+        this.hideEditReleaseDialog();
         this.releasesChanged.emit()
       },
       error: () => {
