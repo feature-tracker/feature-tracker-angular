@@ -42,7 +42,6 @@ export interface CreateReleasePayload {
 
 export interface CreateFeaturePayload {
   productCode: string;
-  code: string;
   title: string;
   description: string;
   releaseCode: string | null;

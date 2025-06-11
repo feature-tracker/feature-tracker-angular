@@ -56,4 +56,8 @@ export class FeatureService {
   getReleaseByCode(releaseCode: string) {
     return this.http.get<ReleaseDto>(this.basePath+'/features/api/releases/'+releaseCode);
   }
+
+  getFeaturesByReleaseCode(releaseCode: string) {
+    return this.http.get<FeatureDto[]>(this.basePath+'/features/api/features?releaseCode='+releaseCode);
+  }
 }

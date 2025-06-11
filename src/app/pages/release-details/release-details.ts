@@ -1,15 +1,17 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {Card} from 'primeng/card';
 import {NgIf} from '@angular/common';
-import {ReactiveFormsModule} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {FeatureService} from '../../service/feature.service';
 import {UserService} from '../../service/user.service';
 import {MenuItem} from 'primeng/api';
-import {Product, ReleaseDto} from '../../models/feature.model';
+import {FeatureDto, Product, ReleaseDto} from '../../models/feature.model';
 import {UserDto} from '../../models/user.model';
 import {Textarea} from 'primeng/textarea';
 import {FTBreadcrumb} from '../../comonents/breadcrumb/breadcrumb';
+import {Button} from 'primeng/button';
+import {TableModule} from 'primeng/table';
 
 @Component({
   selector: 'app-release-details',
@@ -18,7 +20,11 @@ import {FTBreadcrumb} from '../../comonents/breadcrumb/breadcrumb';
     NgIf,
     ReactiveFormsModule,
     Textarea,
-    FTBreadcrumb
+    FTBreadcrumb,
+    Button,
+    RouterLink,
+    TableModule,
+    FormsModule
   ],
   templateUrl: './release-details.html',
 })
@@ -38,12 +44,7 @@ export class ReleaseDetails implements OnInit {
   error: string | null = null;
 
   allUsers: UserDto[] = [];
-  releases: ReleaseDto[] = []
-
-  releaseStatuses = [
-    {label: 'Draft', value: 'DRAFT'},
-    {label: 'Released', value: 'RELEASED'},
-  ];
+  features: FeatureDto[] = []
 
   ngOnInit(): void {
     this.router.paramMap.subscribe(params => {
@@ -54,6 +55,7 @@ export class ReleaseDetails implements OnInit {
       if (releaseCode) {
         this.loadProduct();
         this.loadRelease();
+        this.loadFeaturesByReleaseCode();
         this.loadUsers();
       } else {
         this.error = 'Failed to load release details.';
@@ -78,10 +80,20 @@ export class ReleaseDetails implements OnInit {
     });
   }
 
+  loadFeaturesByReleaseCode() {
+    this.featureService.getFeaturesByReleaseCode(this.releaseCode).subscribe(features => {
+      this.features = features;
+    });
+  }
+
   loadUsers() {
     this.userService.getUsers().subscribe((users) => {
       this.allUsers = users;
     })
   }
 
+  getFullNameByUsername(username: string): String {
+    let user = this.allUsers.find(user => user.username == username)
+    return user?.fullName ?? username;
+  }
 }

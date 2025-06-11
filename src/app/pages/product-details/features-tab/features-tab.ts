@@ -61,7 +61,6 @@ export class FeaturesTab implements OnInit {
   editFeatureDialog = false;
 
   createFeatureForm = this.fb.group({
-    code: ['', [Validators.required]],
     title: ['', [Validators.required]],
     description: ['', []],
     releaseCode: ['', []],
@@ -130,7 +129,6 @@ export class FeaturesTab implements OnInit {
   handleCreateFeature() {
     this.featureService.createFeature({
       productCode: this.productCode(),
-      code: this.createFeatureForm.value.code || "",
       title: this.createFeatureForm.value.title || "",
       description: this.createFeatureForm.value.description || "",
       releaseCode: this.createFeatureForm.value.releaseCode || null,

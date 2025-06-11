@@ -132,10 +132,6 @@
       <form [formGroup]="createFeatureForm" id="createFeatureForm" method="post" (ngSubmit)="handleCreateFeature()">
         <div class="flex flex-col gap-6 ">
           <div>
-            <label for="code" class="block font-bold mb-3">Code</label>
-            <input type="text" pInputText id="code" formControlName="code" required autofocus fluid/>
-          </div>
-          <div>
             <label for="title" class="block font-bold mb-3">Title</label>
             <input type="text" pInputText id="title" formControlName="title" fluid/>
           </div>
