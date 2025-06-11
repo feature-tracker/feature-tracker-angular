@@ -14,6 +14,7 @@ import {Textarea} from 'primeng/textarea';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserDto} from '../../../models/user.model';
 import {Dialog} from 'primeng/dialog';
+import {UtilsService} from '../../../service/utils.service';
 
 @Component({
   selector: 'app-releases-tab',
@@ -36,6 +37,7 @@ import {Dialog} from 'primeng/dialog';
 export class ReleasesTab implements OnInit {
   authService = inject(AuthService);
   featureService = inject(FeatureService);
+  utilsService = inject(UtilsService);
   router = inject(ActivatedRoute);
   fb = inject(FormBuilder);
 
@@ -81,6 +83,10 @@ export class ReleasesTab implements OnInit {
 
   hideEditReleaseDialog() {
     this.editReleaseDialog = false;
+  }
+
+  hasAnyFiltersApplied(table: Table) {
+    return this.utilsService.hasAnyFiltersApplied(table);
   }
 
   clearFilters(table: Table) {

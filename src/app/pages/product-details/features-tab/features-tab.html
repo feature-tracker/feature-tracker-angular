@@ -10,6 +10,7 @@
           />
           <p-button icon="pi pi-filter-slash"
                     label="Clear"
+                    [disabled]="!hasAnyFiltersApplied(dt1)"
                     (click)="clearFilters(dt1)"
           />
         </div>

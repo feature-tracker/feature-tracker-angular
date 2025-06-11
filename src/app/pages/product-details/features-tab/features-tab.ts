@@ -14,6 +14,7 @@ import {Textarea} from 'primeng/textarea';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserDto} from '../../../models/user.model';
 import {Dialog} from 'primeng/dialog';
+import {UtilsService} from '../../../service/utils.service';
 
 @Component({
   selector: 'app-features-tab',
@@ -37,6 +38,7 @@ import {Dialog} from 'primeng/dialog';
 export class FeaturesTab implements OnInit {
   authService = inject(AuthService);
   featureService = inject(FeatureService);
+  utilsService = inject(UtilsService);
   router = inject(ActivatedRoute);
   fb = inject(FormBuilder);
 
@@ -89,6 +91,10 @@ export class FeaturesTab implements OnInit {
     if (oldValue !== newValue) {
       this.loadProductFeatures();
     }
+  }
+
+  hasAnyFiltersApplied(table: Table) {
+    return this.utilsService.hasAnyFiltersApplied(table);
   }
 
   clearFilters(table: Table) {
