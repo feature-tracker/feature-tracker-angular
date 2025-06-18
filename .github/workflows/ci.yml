@@ -36,5 +36,6 @@ jobs:
         name: Build and Publish Docker Image
         run: |
           docker build -t $DOCKER_IMAGE_NAME .
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/feature-tracker-angular ${{ secrets.DOCKERHUB_USERNAME }}/feature-tracker-angular:0.0.1
           echo "Pushing the image $DOCKER_IMAGE_NAME to Docker Hub..."
           docker push --all-tags $DOCKER_IMAGE_NAME
