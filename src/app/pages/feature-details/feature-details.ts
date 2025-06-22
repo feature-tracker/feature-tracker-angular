@@ -3,7 +3,6 @@ import {ActivatedRoute} from '@angular/router';
 import {FeatureDto, Product, ReleaseDto} from '../../models/feature.model';
 import {FeatureService} from '../../service/feature.service';
 import {UserService} from '../../service/user.service';
-import {Card} from 'primeng/card';
 import {NgIf} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {TextareaModule} from 'primeng/textarea';
@@ -11,16 +10,21 @@ import {UserDto} from '../../models/user.model';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {MenuItem} from 'primeng/api';
 import {FTBreadcrumb} from '../../comonents/breadcrumb/breadcrumb';
+import {ButtonModule} from 'primeng/button';
+import {TooltipModule} from 'primeng/tooltip';
+import { MessageService } from 'primeng/api';
+import {AuthService} from '../../service/auth.service';
 
 @Component({
   selector: 'app-feature-details',
   imports: [
-    Card,
     NgIf,
     ReactiveFormsModule,
     TextareaModule,
     BreadcrumbModule,
     FTBreadcrumb,
+    ButtonModule,
+    TooltipModule,
   ],
   templateUrl: './feature-details.html',
 })
@@ -28,6 +32,8 @@ export class FeatureDetails implements OnInit {
   router = inject(ActivatedRoute);
   featureService = inject(FeatureService);
   userService = inject(UserService);
+  authService = inject(AuthService);
+  messageService = inject(MessageService);
 
   items: MenuItem[] =  [
     { icon: 'pi pi-home', route: '/' }
@@ -38,6 +44,7 @@ export class FeatureDetails implements OnInit {
   product: Product | null = null;
   feature: FeatureDto | null = null;
   error: string | null = null;
+  isFavorite: boolean = false;
 
   allUsers: UserDto[] = [];
   releases: ReleaseDto[] = []
@@ -80,6 +87,7 @@ export class FeatureDetails implements OnInit {
   loadFeature() {
     this.featureService.getFeatureByCode(this.featureCode).subscribe(feature => {
       this.feature = feature;
+      this.isFavorite = feature.isFavorite;
     });
   }
 
@@ -98,5 +106,13 @@ export class FeatureDetails implements OnInit {
   getFullNameByUsername(username: string): String {
     let user = this.allUsers.find(user => user.username == username)
     return user?.fullName ?? username;
+  }
+
+  toggleFavorite(): void {
+    this.isFavorite = !this.isFavorite;
+    this.featureService.toggleFavorite(this.featureCode, this.isFavorite).subscribe(() => {
+      const msg = this.isFavorite ? 'Added to favorites' : 'Removed from favorites';
+      this.messageService.add({ severity: 'info', summary: 'Info', detail: msg, life: 3000 });
+    });
   }
 }

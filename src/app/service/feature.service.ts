@@ -60,4 +60,12 @@ export class FeatureService {
   getFeaturesByReleaseCode(releaseCode: string) {
     return this.http.get<FeatureDto[]>(this.basePath+'/features/api/features?releaseCode='+releaseCode);
   }
+
+  toggleFavorite(featureCode: string, isFavorite: boolean) {
+    if(isFavorite) {
+      return this.http.post<void>(this.basePath+'/features/api/features/'+featureCode+'/favorites', null);
+    } else {
+      return this.http.delete<void>(this.basePath+'/features/api/features/'+featureCode+'/favorites');
+    }
+  }
 }

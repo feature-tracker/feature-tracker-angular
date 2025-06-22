@@ -8,12 +8,29 @@
 
         <!-- Left: Code + Description textarea -->
 
-        <label for="details"
-          class="block text-2xl font-bold text-gray-700 md:col-span-2 md:row-start-1">
+        <div class="flex items-center justify-between md:col-span-2 md:row-start-1">
+          <label for="details" class="block text-2xl font-bold text-gray-700">
             {{ feature.title }}
           </label>
-          <!-- filler for col-3, row-1 -->
-          <div class="hidden md:block"></div>
+          <div *ngIf="authService.isLoggedIn()">
+            <p-button
+              icon="pi pi-star"
+              severity="secondary"
+              (click)="toggleFavorite()"
+              [pTooltip]="'Add to favorites'"
+              *ngIf="!isFavorite"
+            />
+            <p-button
+              icon="pi pi-star-fill"
+              severity="secondary"
+              (click)="toggleFavorite()"
+              [pTooltip]="'Remove from favorites'"
+              *ngIf="isFavorite"
+            />
+          </div>
+        </div>
+        <!-- filler for col-3, row-1 -->
+        <div class="hidden md:block"></div>
 
           <textarea
             id="details"

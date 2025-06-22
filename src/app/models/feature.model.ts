@@ -28,6 +28,7 @@ export interface FeatureDto {
   status: string;
   assignedTo: string;
   releaseCode: string;
+  isFavorite: boolean;
   createdBy: string;
   createdAt: Date;
   updatedBy: string;
