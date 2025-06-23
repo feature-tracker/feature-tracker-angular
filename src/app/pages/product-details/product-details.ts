@@ -12,7 +12,7 @@ import {FeaturesTab} from './features-tab/features-tab';
 import {UserDto} from '../../models/user.model';
 import {UserService} from '../../service/user.service';
 import {MenuItem} from 'primeng/api';
-import {FTBreadcrumb} from '../../comonents/breadcrumb/breadcrumb';
+import {FTBreadcrumb} from '../../components/breadcrumb/breadcrumb';
 
 @Component({
   selector: 'app-product-details',

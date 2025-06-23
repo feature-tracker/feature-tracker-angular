@@ -9,7 +9,7 @@ import {TextareaModule} from 'primeng/textarea';
 import {UserDto} from '../../models/user.model';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import {MenuItem} from 'primeng/api';
-import {FTBreadcrumb} from '../../comonents/breadcrumb/breadcrumb';
+import {FTBreadcrumb} from '../../components/breadcrumb/breadcrumb';
 import {ButtonModule} from 'primeng/button';
 import {TooltipModule} from 'primeng/tooltip';
 import { MessageService } from 'primeng/api';

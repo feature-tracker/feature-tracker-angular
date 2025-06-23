@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {CommonModule} from '@angular/common';
-import {NavBar} from './comonents/navbar/navbar';
-import {Sidenav} from './comonents/sidenav/sidenav';
+import {NavBar} from './components/navbar/navbar';
+import {Sidenav} from './components/sidenav/sidenav';
 import {Toast} from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 
