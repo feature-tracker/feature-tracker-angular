@@ -12,8 +12,8 @@ import {MenuItem} from 'primeng/api';
 import {FTBreadcrumb} from '../../components/breadcrumb/breadcrumb';
 import {ButtonModule} from 'primeng/button';
 import {TooltipModule} from 'primeng/tooltip';
-import { MessageService } from 'primeng/api';
 import {AuthService} from '../../service/auth.service';
+import {UtilsService} from '../../service/utils.service';
 
 @Component({
   selector: 'app-feature-details',
@@ -33,7 +33,7 @@ export class FeatureDetails implements OnInit {
   featureService = inject(FeatureService);
   userService = inject(UserService);
   authService = inject(AuthService);
-  messageService = inject(MessageService);
+  utilsService = inject(UtilsService);
 
   items: MenuItem[] =  [
     { icon: 'pi pi-home', route: '/' }
@@ -68,7 +68,8 @@ export class FeatureDetails implements OnInit {
         this.loadUsers();
         this.loadProductReleases();
       } else {
-        this.error = 'Failed to load feature details.';
+        this.error = 'Failed to load feature details';
+        this.utilsService.showError(this.error)
       }
     });
   }
@@ -112,7 +113,7 @@ export class FeatureDetails implements OnInit {
     this.isFavorite = !this.isFavorite;
     this.featureService.toggleFavorite(this.featureCode, this.isFavorite).subscribe(() => {
       const msg = this.isFavorite ? 'Added to favorites' : 'Removed from favorites';
-      this.messageService.add({ severity: 'info', summary: 'Info', detail: msg, life: 3000 });
+      this.utilsService.showInfo(msg)
     });
   }
 }

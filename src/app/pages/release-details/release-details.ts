@@ -12,6 +12,7 @@ import {Textarea} from 'primeng/textarea';
 import {FTBreadcrumb} from '../../components/breadcrumb/breadcrumb';
 import {Button} from 'primeng/button';
 import {TableModule} from 'primeng/table';
+import {UtilsService} from '../../service/utils.service';
 
 @Component({
   selector: 'app-release-details',
@@ -32,6 +33,7 @@ export class ReleaseDetails implements OnInit {
   router = inject(ActivatedRoute);
   featureService = inject(FeatureService);
   userService = inject(UserService);
+  utilsService = inject(UtilsService);
 
   items: MenuItem[] =  [
     { icon: 'pi pi-home', route: '/' }
@@ -59,6 +61,7 @@ export class ReleaseDetails implements OnInit {
         this.loadUsers();
       } else {
         this.error = 'Failed to load release details.';
+        this.utilsService.showError(this.error)
       }
     });
   }

@@ -13,6 +13,7 @@ import {UserDto} from '../../models/user.model';
 import {UserService} from '../../service/user.service';
 import {MenuItem} from 'primeng/api';
 import {FTBreadcrumb} from '../../components/breadcrumb/breadcrumb';
+import {UtilsService} from '../../service/utils.service';
 
 @Component({
   selector: 'app-product-details',
@@ -32,6 +33,7 @@ import {FTBreadcrumb} from '../../components/breadcrumb/breadcrumb';
 export class ProductDetails implements OnInit {
   featureService = inject(FeatureService);
   userService = inject(UserService);
+  utilsService = inject(UtilsService);
   router = inject(ActivatedRoute);
 
   allUsers: UserDto[] = [];
@@ -63,6 +65,7 @@ export class ProductDetails implements OnInit {
         this.loadProductReleases();
       } else {
         this.error = 'Failed to load product details.';
+        this.utilsService.showError(this.error)
       }
     });
   }

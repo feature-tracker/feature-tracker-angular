@@ -107,6 +107,7 @@ export class ReleasesTab implements OnInit {
       },
       error: () => {
         this.error = "Failed to create release."
+        this.utilsService.showError(this.error)
       }
     });
   }
@@ -133,6 +134,7 @@ export class ReleasesTab implements OnInit {
       },
       error: () => {
         this.error = "Failed to update release."
+        this.utilsService.showError(this.error)
       }
     });
   }

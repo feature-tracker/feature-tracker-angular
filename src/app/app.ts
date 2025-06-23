@@ -4,12 +4,10 @@ import {CommonModule} from '@angular/common';
 import {NavBar} from './components/navbar/navbar';
 import {Sidenav} from './components/sidenav/sidenav';
 import {Toast} from 'primeng/toast';
-import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, CommonModule, NavBar, Sidenav, Toast],
-  providers: [MessageService],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

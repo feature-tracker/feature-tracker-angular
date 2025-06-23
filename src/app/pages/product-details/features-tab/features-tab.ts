@@ -141,6 +141,7 @@ export class FeaturesTab implements OnInit {
       },
       error: () => {
         this.error = "Failed to create feature."
+        this.utilsService.showError(this.error)
       }
     });
   }
@@ -173,6 +174,7 @@ export class FeaturesTab implements OnInit {
       },
       error: () => {
         this.error = "Failed to update feature."
+        this.utilsService.showError(this.error)
       }
     });
   }

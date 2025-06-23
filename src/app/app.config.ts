@@ -11,6 +11,7 @@ import {routes} from './app.routes';
 import {AuthService} from './service/auth.service';
 import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi} from '@angular/common/http';
 import {AuthInterceptor} from './service/auth.interceptor';
+import {MessageService} from 'primeng/api';
 import {CustomPreset} from './custom.preset';
 
 export const appConfig: ApplicationConfig = {
@@ -35,5 +36,6 @@ export const appConfig: ApplicationConfig = {
                 preset: CustomPreset,
             }
         }),
+        MessageService,
     ]
 };

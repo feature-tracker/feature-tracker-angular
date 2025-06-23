@@ -1,11 +1,12 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {Table} from 'primeng/table';
-import {FilterMetadata} from 'primeng/api';
+import {FilterMetadata, MessageService} from 'primeng/api';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class UtilsService {
+  messageService = inject(MessageService);
 
   hasAnyFiltersApplied(table: Table) {
     const filters = table.filters
@@ -17,5 +18,13 @@ export class UtilsService {
       }
     })
     return filterApplied;
+  }
+
+  showInfo(message: string) {
+    this.messageService.add({ severity: 'info', summary: 'Info', detail: message, life: 3000 });
+  }
+
+  showError(message: string) {
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message, life: 3000 });
   }
 }
