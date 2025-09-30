@@ -1,10 +1,10 @@
-FROM node:24.1.0
+FROM node:24.9.0
 
 WORKDIR /usr/src/app
 
 COPY . /usr/src/app
 
-RUN npm install -g @angular/cli@19
+RUN npm install -g @angular/cli@20
 
 RUN npm install
 
