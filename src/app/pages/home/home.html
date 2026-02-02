@@ -8,7 +8,7 @@
             [ngClass]="{ 'border-t border-surface-200 dark:border-surface-700': !first }"
           >
             <div class="md:w-60 relative">
-              <a href="{{'/products/'+product.code}}">
+              <a [routerLink]="'/products/'+product.code">
                 <img
                   class="block xl:block mx-auto rounded-border w-full"
                   [src]="'/images/'+product.code+'.png'"

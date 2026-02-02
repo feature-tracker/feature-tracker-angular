@@ -1,14 +1,14 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FeatureService} from "../../service/feature.service";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {Product} from "../../models/feature.model";
 import { DataView } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-home',
-  imports: [ CommonModule,DataView, ButtonModule, ],
+  imports: [CommonModule, DataView, ButtonModule, RouterLink,],
   templateUrl: './home.html',
 })
 export class Home implements OnInit {
